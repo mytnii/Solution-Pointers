@@ -817,27 +817,26 @@ void deleteMatrix(char** matrix, int row)
 
 void pushRowBackMatrix(int**& matrix, int &row, int column)
 {
-	int** matrix2 = allocateMatrix(row + 1, column);
+	int** matrix2 = new int*(row + 1);
 
 	for (int i = 0; i < row; ++i)
 	{
-		for (int j = 0; j < column; ++j)
-		{
-			
-			matrix2[i][j] = matrix[i][j];
-		}
+		matrix2[i] = matrix[i]
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[row] = new int[column]
 
 	for (int i = 0; i < column; i++)
 	{
-		matrix2[row][i] = i;
+		matrix[row][i] = i;
 	}
 
 	row++;
 
-	matrix = matrix2;
 	
 }
 void pushRowBackMatrix(double**& matrix, int& row, int column)
@@ -848,27 +847,20 @@ void pushRowBackMatrix(double**& matrix, int& row, int column)
 
 	for (int i = 0; i < row + 1; i++)
 	{
-		matrix2[i] = new double[column];
+		matrix2[i] = matrix[i]
 	}
 
-	for (int i = 0; i < row; ++i)
-	{
-		for (int j = 0; j < column; ++j)
-		{
+	delete[] matrix;
 
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
+	matrix = matrix2;
 
-	deleteMatrix(matrix, row);
+	matrix[row] = new double[column];
 
 	for (int i = 0; i < column; i++)
 	{
-		matrix2[row][i] = i + 0.1;
+		matrix[row][i] = i + 0.1;
 	}
 	row++;
-
-	matrix = matrix2;
 
 }
 void pushRowBackMatrix(char**& matrix, int& row, int column)
@@ -876,57 +868,50 @@ void pushRowBackMatrix(char**& matrix, int& row, int column)
 	row--;
 	char** matrix2 = new char* [row + 1];
 
-	for (int i = 0; i < row + 1; i++)
-	{
-		matrix2[i] = new char[column];
-	}
+	
 
 	for (int i = 0; i < row; ++i)
 	{
-		for (int j = 0; j < column; ++j)
-		{
-
-			matrix2[i][j] = matrix[i][j];
-		}
+		matrix2[i] = mztrix[i];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[row] = new char[column];
 
 	for (int i = 0; i < column; i++)
 	{
-		matrix2[row ][i] = 'a' + i;
+		matrix[row ][i] = 'a' + i;
 	}
 	row++;
-
-	matrix = matrix2;
 
 }
 
 void pushRowFrontMatrix(int**& matrix, int& row, int column)
 {
 
-	int** matrix2 = allocateMatrix(row + 1, column);
+	int** matrix2 = new int*(row + 1);
 
-
-	for (int i = 0; i < column; i++)
-	{
-		matrix2[0][i] = i;
-	}
 
 	for (int i = 0; i < row; ++i)
 	{
-		for (int j = 0; j < column; ++j)
-		{
-
-			matrix2[i + 1][j] = matrix[i][j];
-		}
+		matrix2[i + 1] = matrix[i];
 	}
 
-	deleteMatrix(matrix, row);
-
-	row++;
+	delete[] matrix;
 
 	matrix = matrix2;
+
+	matrix[0] = new int[column];
+
+	for (int i = 0; i < column; i++)
+	{
+		matrix[0][i] = i;
+	}
+
+	row++;
 }
 void pushRowFrontMatrix(double**& matrix, int& row, int column)
 {
@@ -936,31 +921,21 @@ void pushRowFrontMatrix(double**& matrix, int& row, int column)
 
 	for (int i = 0; i < row + 1; i++)
 	{
-		matrix2[i] = new double [column];
+		matrix2[i + 1] = matrix[i];
 	}
 
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[row] = new double[column];
 
 	for (int i = 0; i < column; i++)
 	{
-		matrix2[0][i] = i + 0.1;
+		matrix[0][i] = i + 0.1;
 	}
-
-	for (int i = 0; i < row; ++i)
-	{
-		for (int j = 0; j < column; ++j)
-		{
-
-			matrix2[i + 1][j] = matrix[i][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
-
 
 	row++;
-
-
-	matrix = matrix2;
 }
 void pushRowFrontMatrix(char**& matrix, int& row, int column)
 {
@@ -970,155 +945,124 @@ void pushRowFrontMatrix(char**& matrix, int& row, int column)
 
 	for (int i = 0; i < row + 1; i++)
 	{
-		matrix2[i] = new char [column];
+		matrix2[i + 1] = matrix[i];
 	}
 
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[row] = new char[column];
 
 	for (int i = 0; i < column; i++)
 	{
-		matrix2[0][i] = 'a' + i;
+		matrix[0][i] = i + 0.1;
 	}
-
-	for (int i = 0; i < row; ++i)
-	{
-		for (int j = 0; j < column; ++j)
-		{
-
-			matrix2[i + 1][j] = matrix[i][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
-
 
 	row++;
-
-
-	matrix = matrix2;
 }
 
 void insertRowMatrix(int**& matrix, int& row, int column, int index)
 {
 
-	int** matrix2 = allocateMatrix(row + 1, column);
+	int** matrix2 = new int*(row + 1);
 
 	for (int i = 0; i < index; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
+			matrix2[i]= matrix[i];
 	}
+
+
+	for (int i = row; i > index; i--)
+	{
+			matrix2[i] = matrix[i - 1];
+	}
+
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[index] = new int[column];
+
+	for (int i = 0; i < column; i++)
+	{
+		matrix[index][i] = i;
+	}
+
+	row++;
+}
+void insertRowMatrix(double**& matrix, int& row, int column, int index)
+{
+	row--;
+
+	double** matrix2 = new double*(row + 1);
+
+	for (int i = 0; i < index; i++)
+	{
+		matrix2[i] = matrix[i];
+	}
+
+
+	for (int i = row; i > index; i--)
+	{
+		matrix2[i] = matrix[i - 1];
+	}
+
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[index] = new double[column];
+
+	for (int i = 0; i < column; i++)
+	{
+		matrix[index][i] = i;
+	}
+
+	row++;
+}
+void insertRowMatrix(char**& matrix, int& row, int column, int index)
+{
+	row--;
+
+	char** matrix2 = new char*(row + 1);
+
+	for (int i = 0; i < index; i++)
+	{
+		matrix2[i] = matrix[i];
+	}
+
+
+	for (int i = row; i > index; i--)
+	{
+		matrix2[i] = matrix[i - 1];
+	}
+
+	delete[] matrix;
+
+	matrix = matrix2;
+
+	matrix[index] = new char[column];
 
 	for (int i = 0; i < column; i++)
 	{
 		matrix2[index][i] = i;
 	}
 
-	for (int i = row; i > index; i--)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i - 1][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
-
 	row++;
-
-	matrix = matrix2;
 }
-void insertRowMatrix(double**& matrix, int& row, int column, int index)
-{
-	row--;
 
-	double** matrix2 = new double* [row + 1];
-
-	for (int i = 0; i < row + 1; i++)
-	{
-		matrix2[i] = new double[column];
-	}
-
-	for (int i = 0; i < index; i++)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
-
-	for (int i = 0; i < column; i++)
-	{
-		matrix2[index][i] = i + 0.1;
-	}
-
-	for (int i = row; i > index; i--)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i - 1][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
-
-	row++;
-
-	matrix = matrix2;
-}
-void insertRowMatrix(char**& matrix, int& row, int column, int index)
-{
-	row--;
-
-	char** matrix2 = new char* [row + 1];
-
-	for (int i = 0; i < row + 1; i++)
-	{
-		matrix2[i] = new char[column];
-	}
-
-	for (int i = 0; i < index; i++)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
-
-	for (int i = 0; i < column; i++)
-	{
-		matrix2[index][i] = 'a' + i;
-	}
-
-	for (int i = row; i > index; i--)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i - 1][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
-
-	row++;
-
-	matrix = matrix2;
-}
 
 void popRowBackMatrix(int**& matrix, int& row, int column)
 {
-	int** matrix2 = allocateMatrix(row - 1, column);
+	int** matrix2 = new int*(row - 1);
 
 	for (int i = 0; i < row - 1; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
+			matrix2[i] = matrix[i];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
 	row--;
 
@@ -1128,22 +1072,14 @@ void popRowBackMatrix(double**& matrix, int& row, int column)
 {
 	row++;
 
-	double** matrix2 = new double*[row - 1];
+	double** matrix2 = new double* (row - 1);
 
 	for (int i = 0; i < row - 1; i++)
 	{
-		matrix2[i] = new double[column];
+		matrix2[i] = matrix[i];
 	}
 
-	for (int i = 0; i < row - 1; i++)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
 	row--;
 
@@ -1153,22 +1089,14 @@ void popRowBackMatrix(char**& matrix, int& row, int column)
 {
 	row++;
 
-	char** matrix2 = new char* [row - 1];
+	char** matrix2 = new char* (row - 1);
 
 	for (int i = 0; i < row - 1; i++)
 	{
-		matrix2[i] = new char[column];
+		matrix2[i] = matrix[i];
 	}
 
-	for (int i = 0; i < row - 1; i++)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
 	row--;
 
@@ -1178,65 +1106,50 @@ void popRowBackMatrix(char**& matrix, int& row, int column)
 void popRowFrontMatrix(int**& matrix, int& row, int column)
 {
 
-	int** matrix2 = allocateMatrix(row - 1, column);
+	int** matrix2 = new int*(row - 1);
 
 	for (int i = 0; i < row - 1; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i + 1][j];
-		}
+			matrix2[i] = matrix[i + 1];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
+	--row;
 
 	matrix = matrix2;
 }
 void popRowFrontMatrix(double**& matrix, int& row, int column)
 {
+	++row;
 
-	double** matrix2 = new double*[row - 1];
-
-	for (int i = 0; i < row - 1; i++)
-	{
-		matrix2[i] = new double[column];
-	}
+	double** matrix2 = new double* (row - 1);
 
 	for (int i = 0; i < row - 1; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i + 1][j];
-		}
+		matrix2[i] = matrix[i + 1];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
-
+	--row;
 
 	matrix = matrix2;
 }
 void popRowFrontMatrix(char**& matrix, int& row, int column)
 {
-	char** matrix2 = new char*[row - 1];
+	++row;
+
+	char** matrix2 = new char* (row - 1);
 
 	for (int i = 0; i < row - 1; i++)
 	{
-		matrix2[i] = new char[column];
+		matrix2[i] = matrix[i + 1];
 	}
 
-	for (int i = 0; i < row - 1; i++)
-	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i + 1][j];
-		}
-	}
+	delete[] matrix;
 
-	deleteMatrix(matrix, row);
-
-	row--;
+	--row;
 
 	matrix = matrix2;
 }
@@ -1244,25 +1157,19 @@ void popRowFrontMatrix(char**& matrix, int& row, int column)
 void eraseRowMatrix(int**& matrix, int& row, int column, int index)
 {
 
-	int** matrix2 = allocateMatrix(row - 1, column);
+	int** matrix2 = new int*(row - 1);
 
 	for (int i = 0; i < index; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
+			matrix2[i] = matrix[i];
 	}
 
 	for (int i = index; i < row - 1;)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i + 1][j];
-		}
+			matrix2[i] = matrix[i + 1];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
 	row--;
 
@@ -1272,30 +1179,19 @@ void eraseRowMatrix(double**& matrix, int& row, int column, int index)
 {
 	row++;
 
-	double** matrix2 = new double* [row - 1];
-
-	for (int i = 0; i < row - 1; i++)
-	{
-		matrix2[i] = new double[column];
-	}
+	double** matrix2 = new double* (row - 1);
 
 	for (int i = 0; i < index; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
+		matrix2[i] = matrix[i];
 	}
 
 	for (int i = index; i < row - 1;)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i + 1][j];
-		}
+		matrix2[i] = matrix[i + 1];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
 	row--;
 
@@ -1305,30 +1201,19 @@ void eraseRowMatrix(char**& matrix, int& row, int column, int index)
 {
 	row++;
 
-	char** matrix2 = new char* [row - 1];
-
-	for (int i = 0; i < row - 1; i++)
-	{
-		matrix2[i] = new char[column];
-	}
+	char** matrix2 = new char* (row - 1);
 
 	for (int i = 0; i < index; i++)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
+		matrix2[i] = matrix[i];
 	}
 
 	for (int i = index; i < row - 1;)
 	{
-		for (int j = 0; j < column; j++)
-		{
-			matrix2[i][j] = matrix[i + 1][j];
-		}
+		matrix2[i] = matrix[i + 1];
 	}
 
-	deleteMatrix(matrix, row);
+	delete[] matrix;
 
 	row--;
 
@@ -1337,271 +1222,220 @@ void eraseRowMatrix(char**& matrix, int& row, int column, int index)
 
 void pushColBackMatrix(int**& matrix, int row, int& column)
 {
-	int** matrix2 = allocateMatrix(row, column + 1);
-
 	for (int i = 0; i < row; i++)
 	{
+		int* matrix2 = new int[column + 1];
 		for (int j = 0; j < column; j++)
 		{
-
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
+		delete[] matrix[i];
+
+		matrix[i] = matrix2;
+
+		for (int i = 0; i < row; i++)
+		{
+			matrix[i][column] = i;
+		}
+
+		column++;
 	}
-
-	deleteMatrix(matrix, row);
-
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i][column] = i;
-	}
-
-	column++;
-
-	matrix = matrix2;
 }
 void pushColBackMatrix(double**& matrix, int row, int& column)
 {
 	column--;
 
-	double** matrix2 = new double*[row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new double[column + 1];
-	}
-
-	for (int i = 0; i < row; i++)
-	{
+		double* matrix2 = new double[column + 1];
 		for (int j = 0; j < column; j++)
 		{
-
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
+		delete[] matrix[i];
 
-	deleteMatrix(matrix, row);
+		matrix[i] = matrix2;
+	}
 
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i][column] = i + 0.1;
+		matrix[i][column] = i + 0.1;
 	}
 
 	column++;
-
-	matrix = matrix2;
 }
 void pushColBackMatrix(char**& matrix, int row, int& column)
 {
 	column--;
 
-	char** matrix2 = new char* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new char[column + 1];
-	}
-
-	for (int i = 0; i < row; i++)
-	{
+		char* matrix2 = new char[column + 1];
 		for (int j = 0; j < column; j++)
 		{
-
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
+		delete[] matrix[i];
 
-	deleteMatrix(matrix, row);
+		matrix[i] = matrix2;
+	}
 
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i][column] = 'a' + i;
+		matrix[i][column] = 'a' + i;
 	}
 
 	column++;
-
-	matrix = matrix2;
 }
 
 void pushColFrontMatrix(int**& matrix, int row, int& column)
 {
-
-	int** matrix2 = allocateMatrix(row, column + 1);
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i][column - column] = i;
-	}
+		int* matrix2 = new int(column + 1);
 
-	for (int i = 0; i < row; i++)
-	{
 		for (int j = 0; j < column; j++)
 		{
-			matrix2[i][j + 1] = matrix[i][j];
+			matrix2[j + 1] = matrix[i][j];
 		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
 	}
 
-	deleteMatrix(matrix, row);
 
+	for (int i = 0; i < row; i++)
+	{
+		matrix[i][0] = i;
+	}
 	column++;
-
-	matrix = matrix2;
 }
 void pushColFrontMatrix(double**& matrix, int row, int& column)
 {
 	column--;
 
-	double** matrix2 = new double*[row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new double[column + 1];
-	}
+		double* matrix2 = new double(column + 1);
 
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i][column - column] = i + 0.1;
-	}
-
-	for (int i = 0; i < row; i++)
-	{
 		for (int j = 0; j < column; j++)
 		{
-			matrix2[i][j + 1] = matrix[i][j];
+			matrix2[j + 1] = matrix[i][j];
 		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
 	}
 
-	deleteMatrix(matrix, row);
+	for (int i = 0; i < row; i++)
+	{
+		matrix[i][0] = i + 0.1;
+	}
 
 	column++;
-
-	matrix = matrix2;
 }
 void pushColFrontMatrix(char**& matrix, int row, int& column)
 {
 	column--;
 
-	char** matrix2 = new char* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new char[column + 1];
-	}
+		char* matrix2 = new char(column + 1);
 
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i][column - column] = 'a' + i;
-	}
-
-	for (int i = 0; i < row; i++)
-	{
 		for (int j = 0; j < column; j++)
 		{
-			matrix2[i][j + 1] = matrix[i][j];
+			matrix2[j + 1] = matrix[i][j];
 		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
 	}
 
-	deleteMatrix(matrix, row);
+	for (int i = 0; i < row; i++)
+	{
+		matrix[i][0] = 'a' + i;
+	}
 
 	column++;
-
-	matrix = matrix2;
 }
 
 void insertColMatrix(int**& matrix, int row, int& column, int index)
 {
-	int** matrix2 = allocateMatrix(row, column + 1);
-
 	for (int i = 0; i < row; i++)
 	{
+		int* matrix2 = new int[column + 1];
 		for (int j = 0; j < index; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
-
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = column; j > index; j--)
+		for (int j = index; j < column; j++)
 		{
-			matrix2[i][j] = matrix[i][j - 1];
+			matrix2[j + 1] = matrix[i][j];
 		}
-	}
 
-	deleteMatrix(matrix, row);
+		delete[] matrix[i];
 
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i][index] = i;
-	}
-
-
-	matrix = matrix2;
-}
-void insertColMatrix(double**& matrix, int row, int& column, int index)
-{
-
-	double** matrix2 = new double* [row];
-
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i] = new double[column + 1];
+		matrix[i] = matrix2[i];
 	}
 
 	for (int i = 0; i < row; i++)
 	{
-		for (int j = 0; j < index; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
-
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = column; j > index; j--)
-		{
-			matrix2[i][j] = matrix[i][j - 1];
-		}
-	}
-
-	deleteMatrix(matrix, row);
-
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i][index] = i + 0.1;
+		matrix[i][index] = i;
 	}
 
 	column++;
+}
+void insertColMatrix(double**& matrix, int row, int& column, int index)
+{
+	--column;
 
-	matrix = matrix2;
+	for (int i = 0; i < row; i++)
+	{
+		double* matrix2 = new double[column + 1];
+		for (int j = 0; j < index; j++)
+		{
+			matrix2[j] = matrix[i][j];
+		}
+		for (int j = index; j < column; j++)
+		{
+			matrix2[j + 1] = matrix[i][j];
+		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
+	}
+
+	for (int i = 0; i < row; i++)
+	{
+		matrix[i][index] = i;
+	}
+
+	column++;
 }
 void insertColMatrix(char**& matrix, int row, int& column, int index)
 {
 	column--;
 
-	char** matrix2 = new char* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new char[column + 1];
-	}
-
-	for (int i = 0; i < row; i++)
-	{
+		char* matrix2 = new char[column + 1];
 		for (int j = 0; j < index; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
-
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = column; j > index; j--)
+		for (int j = index; j < column; j++)
 		{
-			matrix2[i][j] = matrix[i][j - 1];
+			matrix2[j + 1] = matrix[i][j];
 		}
-	}
 
-	deleteMatrix(matrix, row);
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
+	}
 
 	for (int i = 0; i < row; i++)
 	{
@@ -1609,235 +1443,196 @@ void insertColMatrix(char**& matrix, int row, int& column, int index)
 	}
 
 	column++;
-
-	matrix = matrix2;
 }
 
 
 void popColBackMatrix(int**& matrix, int row, int& column)
 {
-	int** matrix2 = allocateMatrix(row, column - 1);
+	
 
 	for (int i = 0; i < row; i++)
 	{
+		int* matrix = new int[column - 1];
 		for (int j = 0; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
 	}
 
-	deleteMatrix(matrix, row);
-
-	matrix = matrix2;
+	column--;
 }
 void popColBackMatrix(double**& matrix, int row, int& column)
 {
-
-	double** matrix2 = new double* [row];
-
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i] = new double[column - 1];
-	}
+	column++;
 
 	for (int i = 0; i < row; i++)
 	{
+		double* matrix = new double[column - 1];
 		for (int j = 0; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
 	}
-
-	deleteMatrix(matrix, row);
-
-	matrix = matrix2;
-}
-void popColBackMatrix(char**& matrix, int row, int& column)
-{
-
-	char** matrix2 = new char* [row];
-
-	for (int i = 0; i < row; i++)
-	{
-		matrix2[i] = new char[column - 1];
-	}
-
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = 0; j < column - 1; j++)
-		{
-			matrix2[i][j] = matrix[i][j];
-		}
-	}
-
-	deleteMatrix(matrix, row);
 
 	column--;
 
-	matrix = matrix2;
+}
+void popColBackMatrix(char**& matrix, int row, int& column)
+{
+	column++;
+
+	for (int i = 0; i < row; i++)
+	{
+		char* matrix = new char[column - 1];
+		for (int j = 0; j < column - 1; j++)
+		{
+			matrix2[j] = matrix[i][j];
+		}
+
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
+	}
+
+	column--;
 }
 
 
 void popColFrontMatrix(int**& matrix, int row, int& column)
 {
-	int** matrix2 = allocateMatrix(row, column - 1);
 
 	for (int i = 0; i < row; i++)
 	{
+		int* matrix2 = new int[colum - 1];
 		for (int j = 0; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j + 1];
+			matrix2[j] = matrix[i][j + 1];
 		}
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i]
 	}
 
-	deleteMatrix(matrix, row);
-
 	column--;
-
-	matrix = matrix2;
 }
 void popColFrontMatrix(double**& matrix, int row, int& column)
 {
 	column++;
 
-	double** matrix2 = new double* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new double[column - 1];
-	}
-
-	for (int i = 0; i < row; i++)
-	{
+		double* matrix2 = new double[colum - 1];
 		for (int j = 0; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j + 1];
+			matrix2[j] = matrix[i][j + 1];
 		}
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i]
 	}
 
-	deleteMatrix(matrix, row);
-
 	column--;
-
-	matrix = matrix2;
 }
 void popColFrontMatrix(char**& matrix, int row, int& column)
 {
 	column++;
 
-	char** matrix2 = new char* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new char[column - 1];
-	}
-
-	for (int i = 0; i < row; i++)
-	{
+		char* matrix2 = new char[colum - 1];
 		for (int j = 0; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j + 1];
+			matrix2[j] = matrix[i][j + 1];
 		}
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i]
 	}
 
-	deleteMatrix(matrix, row);
-
 	column--;
-
-	matrix = matrix2;
 }
 
 
 void eraseColMatrix(int**& matrix, int row, int& column, int index)
 {
-	int** matrix2 = allocateMatrix(row, column - 1);
 
 	for (int i = 0; i < row; i++)
 	{
+		int* matrix2 = new int[column - 1];
+
 		for (int j = 0; j < index; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
 
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = index; j < column; j++)
+		for (int j = index; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j + 1];
+			matrix2[j] = matrix[i][j + 1];
 		}
-	}
 
-	deleteMatrix(matrix, row);
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
+	}
 
 	column--;
-
-	matrix = matrix2;
 }
 void eraseColMatrix(double**& matrix, int row, int& column, int index)
 {
 	column++;
 
-	double** matrix2 = new double* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new double[column - 1];
-	}
+		double* matrix2 = new double[column - 1];
 
-	for (int i = 0; i < row; i++)
-	{
 		for (int j = 0; j < index; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
 
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = index; j < column; j++)
+		for (int j = index; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j + 1];
+			matrix2[j] = matrix[i][j + 1];
 		}
-	}
 
-	deleteMatrix(matrix, row);
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
+	}
 
 	column--;
-
-	matrix = matrix2;
 }
 void eraseColMatrix(char**& matrix, int row, int& column, int index)
 {
 	column++;
 
-	char** matrix2 = new char* [row];
-
 	for (int i = 0; i < row; i++)
 	{
-		matrix2[i] = new char[column - 1];
-	}
+		char* matrix2 = new char[column - 1];
 
-	for (int i = 0; i < row; i++)
-	{
 		for (int j = 0; j < index; j++)
 		{
-			matrix2[i][j] = matrix[i][j];
+			matrix2[j] = matrix[i][j];
 		}
-	}
 
-	for (int i = 0; i < row; i++)
-	{
-		for (int j = index; j < column; j++)
+		for (int j = index; j < column - 1; j++)
 		{
-			matrix2[i][j] = matrix[i][j + 1];
+			matrix2[j] = matrix[i][j + 1];
 		}
-	}
 
-	deleteMatrix(matrix, row);
+		delete[] matrix[i];
+
+		matrix[i] = matrix2[i];
+	}
 
 	column--;
-
-	matrix = matrix2;
 }
 
